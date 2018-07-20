@@ -1,0 +1,13 @@
+<AppScreenManager>:
+    Screen:
+        name: 'HomeScreen'
+        FloatLayout:
+            Button:
+                text: 'Home Screen'
+                on_press: root.current = 'ManageItems'
+    Screen:
+        name: 'ManageItems'
+        FloatLayout:
+            Button:
+                text: 'Manage Items'
+                on_press: root.current = 'HomeScreen'
