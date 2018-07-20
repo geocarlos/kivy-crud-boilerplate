@@ -1,13 +1,119 @@
+<_Button@Button>:
+    background_color: .5, .9, 1, .9
+
 <AppScreenManager>:
     Screen:
         name: 'HomeScreen'
-        FloatLayout:
-            Button:
-                text: 'Home Screen'
-                on_press: root.current = 'ManageItems'
+        RelativeLayout:
+            canvas.before:
+                Color:
+                    rgba: 0, 1, 1, .5
+            canvas:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FloatLayout:
+                pos_hint: {'x': 0, 'top': 1}
+                size_hint: 1, .1
+                Label:
+                    text: 'Home'
+                    halign: 'center'
+                    font_size: 30
+                    size_hint: 1, .02
+                    pos_hint: {'x': 0, 'top': .5}
+            BoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: .7, 1, 1, .7
+                canvas:
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                size_hint: .9, .8
+                pos_hint: {'x': .05, 'top': .9}
+                ScrollView:
+                    id: scroll
+                    size_hint: 1, 1
+                    bar_width: 15
+                    scroll_type: ['bars', 'content']
+                    GridLayout:
+                        id: list
+                        cols: 1
+                        padding: 14
+                        spacing: 14
+                        size_hint_y: None
+            _Button:
+                pos_hint: {'x': 0, 'y': 0}
+                size_hint: 1, 0.09
+                text: 'Add Item >>'
+                on_press:
+                    root.transition.direction = 'left'
+                    root.current = 'ManageItems'
     Screen:
         name: 'ManageItems'
         FloatLayout:
-            Button:
-                text: 'Manage Items'
-                on_press: root.current = 'HomeScreen'
+            canvas.before:
+                Color:
+                    rgba: 0, 1, 1, .5
+            canvas:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FloatLayout:
+                pos_hint: {'x': 0, 'top': 1}
+                size_hint: 1, .1
+                Label:
+                    text: 'Add new item'
+                    halign: 'center'
+                    font_size: 30
+                    size_hint: 1, .02
+                    pos_hint: {'x': 0, 'top': .5}
+            BoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: .5, 1, .8, .7
+                canvas:
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                size_hint: .9, .7
+                pos_hint: {'x': .05, 'top': .8}
+                GridLayout:
+                    id: add_item
+                    cols: 2
+                    row_default_height: 40
+                    row_force_default: True
+                    padding: 14
+                    spacing: 14
+                    pos_hint: {'x': 0, 'y': -0.25}
+                    Label:
+                        text: 'Item: '
+                        font_size: 25
+                    Label:
+                        text: 'Category: '
+                        font_size: 25
+                    TextInput:
+                        hint_text: 'Item name'
+                        font_size: 25
+                        background_color: 0, 1, .7, .3
+                    FloatLayout:
+                        Spinner:
+                            text: 'Select'
+                            values: ['Food', 'Drink', 'Chemicals']
+                            size_hint: (None, None)
+                            size: (180, 35)
+                            pos_hint: {'x': 0, 'center_y': .5}
+                            background_color: .5, .9, 1, .9
+                    _Button:
+                        text: 'Save'
+                        font_size: 20
+                    _Button:
+                        text: 'Add category'
+                        font_size: 20
+            _Button:
+                pos_hint: {'x': 0, 'y': 0}
+                size_hint: 1, 0.09
+                text: '<< Home Screen'
+                on_press:
+                    root.transition.direction = 'right'
+                    root.current = 'HomeScreen'
