@@ -16,7 +16,7 @@
                 pos_hint: {'x': 0, 'top': 1}
                 size_hint: 1, .1
                 Label:
-                    text: 'Home'
+                    text: 'My Item List'
                     halign: 'center'
                     font_size: 30
                     size_hint: 1, .02
@@ -93,6 +93,7 @@
                         text: 'Category: '
                         font_size: 25
                     TextInput:
+                        id: item
                         hint_text: 'Item name'
                         font_size: 25
                         background_color: 0, 1, .7, .3
@@ -108,6 +109,7 @@
                     _Button:
                         text: 'Save'
                         font_size: 20
+                        on_press: root.add_item()
                     _Button:
                         text: 'Add category'
                         font_size: 20

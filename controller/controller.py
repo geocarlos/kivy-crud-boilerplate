@@ -46,7 +46,7 @@ def get_items():
     cats = session.query(Category).all()
     itemObjs = []
     for item in items:
-        cat = [c for c in cats if c.id == item.id][0]
+        cat = [c for c in cats if c.id == item.cat_id][0]
         itemObj = ItemObj(item, cat)
         itemObjs.append(itemObj)
     session.close()

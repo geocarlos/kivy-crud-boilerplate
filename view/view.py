@@ -29,19 +29,18 @@ Builder.load_file('./view/MyApp.kv')
 
 class AppScreenManager(ScreenManager):
 
-    categories = ObjectProperty([])
+    categories = ObjectProperty(None, allownone=True)
 
     """
         Get the items from the database and display them on the ScrollView
     """
     def set_item_list(self):
 
-        self.set_categories()
         items = controller.get_items()
 
         for item in items:
             self.ids.list.add_widget(Button(text=item.name, id=str(item.id), color=(0, 0, 0, 1),
-                        background_color=(.9, 9, 9, 0),
+                        background_color=(.9, 9, 9, 0), font_size=30,
                         halign='left', size_hint_y=None, height=30))
 
     """
@@ -49,9 +48,19 @@ class AppScreenManager(ScreenManager):
     """
     def set_categories(self):
         self.categories = controller.get_categories()
-        print(self.categories)
         for cat in self.categories:
             self.ids.categories.values.append(cat.name)
+
+    def add_category():
+        pass
+
+    def add_item(self):
+        if not self.ids.item.text:
+            return
+        controller.add_item({"name": self.ids.item.text, "cat_id": 1})
+        self.ids.item.text = ''
+        self.ids.list.clear_widgets()
+        self.set_item_list()
 
     def __init__(self, *args):
         super(AppScreenManager, self).__init__(*args)
@@ -60,6 +69,7 @@ class AppScreenManager(ScreenManager):
         self.ids.scroll.size = (200, Window.height)
         self.ids.list.bind(minimum_height=self.ids.list.setter('height'))
 
+        self.set_categories()
         self.set_item_list()
 
 class MyApp(App):
