@@ -51,3 +51,8 @@ def get_items():
         itemObjs.append(itemObj)
     session.close()
     return itemObjs
+
+def get_categories():
+    categories = session.query(Category).all()
+    session.close()
+    return categories

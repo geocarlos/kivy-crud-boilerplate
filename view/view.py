@@ -10,6 +10,8 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.textinput import TextInput
 from kivy.lang import Builder
 from kivy.core.window import Window
+from kivy.properties import ObjectProperty
+from controller import controller
 
 # Set window size
 Window.size = (450, 750)
@@ -26,6 +28,31 @@ Builder.load_file('./view/MyApp.kv')
 
 
 class AppScreenManager(ScreenManager):
+
+    categories = ObjectProperty([])
+
+    """
+        Get the items from the database and display them on the ScrollView
+    """
+    def set_item_list(self):
+
+        self.set_categories()
+        items = controller.get_items()
+
+        for item in items:
+            self.ids.list.add_widget(Button(text=item.name, id=str(item.id), color=(0, 0, 0, 1),
+                        background_color=(.9, 9, 9, 0),
+                        halign='left', size_hint_y=None, height=30))
+
+    """
+        Set the values for the Category spinner
+    """
+    def set_categories(self):
+        self.categories = controller.get_categories()
+        print(self.categories)
+        for cat in self.categories:
+            self.ids.categories.values.append(cat.name)
+
     def __init__(self, *args):
         super(AppScreenManager, self).__init__(*args)
 
@@ -33,10 +60,7 @@ class AppScreenManager(ScreenManager):
         self.ids.scroll.size = (200, Window.height)
         self.ids.list.bind(minimum_height=self.ids.list.setter('height'))
 
-        for i in range(100):
-            self.ids.list.add_widget(Button(text="Test %s" % i, id=str(i), color=(0, 0, 0, 1),
-                        background_color=(.9, 9, 9, 0),
-                        halign='left', size_hint_y=None, height=30))
+        self.set_item_list()
 
 class MyApp(App):
     def build(self):
