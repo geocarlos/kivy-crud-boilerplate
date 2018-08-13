@@ -52,6 +52,7 @@
     Screen:
         name: 'ManageItems'
         FloatLayout:
+            id: input_area
             canvas.before:
                 Color:
                     rgba: 0, 1, 1, .5
@@ -113,6 +114,7 @@
                     _Button:
                         text: 'Add category'
                         font_size: 20
+                        on_press: root.open_category_form(root)
             _Button:
                 pos_hint: {'x': 0, 'y': 0}
                 size_hint: 1, 0.09

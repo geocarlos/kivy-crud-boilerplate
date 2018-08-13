@@ -8,6 +8,7 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.textinput import TextInput
+from kivy.uix.gridlayout import GridLayout
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
@@ -30,6 +31,7 @@ Builder.load_file('./view/MyApp.kv')
 class AppScreenManager(ScreenManager):
 
     categories = ObjectProperty(None, allownone=True)
+    category_form = ObjectProperty(None, allownone=True)
 
     """
         Get the items from the database and display them on the ScrollView
@@ -51,8 +53,27 @@ class AppScreenManager(ScreenManager):
         for cat in self.categories:
             self.ids.categories.values.append(cat.name)
 
-    def add_category():
-        pass
+    def add_category(*args):
+        print(args)
+        root = args[0]
+        if not root.category_form.name.text:
+            return
+
+        controller.add_category({
+            'name': root.category_form.name.text,
+        })
+
+        root.ids.categories.values = []
+        root.set_categories()
+        root.cancel_category()
+
+    def cancel_category(self, *args):
+        self.ids.input_area.remove_widget(self.category_form)
+        self.category_form = None
+
+    def open_category_form(self, *args):
+        self.category_form = CategoryForm(self)
+        self.ids.input_area.add_widget(self.category_form)
 
     def add_item(self):
         if not self.ids.item.text:
@@ -71,6 +92,19 @@ class AppScreenManager(ScreenManager):
 
         self.set_categories()
         self.set_item_list()
+
+class CategoryForm(GridLayout):
+    def __init__(self, root, *args, **kwargs):
+        super(CategoryForm, self).__init__(*args, **kwargs)
+        self.name = TextInput(hint_text='Name of category')
+        self.add_widget(self.name)
+        self.add_widget(Button(text='Add', on_press=root.add_category))
+        self.add_widget(
+            Button(text='Cancel', on_press=root.cancel_category))
+        self.cols = 1
+        self.spacing = 5
+        self.size_hint = (0.9, 0.3)
+        self.pos_hint = {'x': .05, 'y': .5}
 
 class MyApp(App):
     def build(self):
