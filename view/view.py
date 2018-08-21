@@ -9,7 +9,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.textinput import TextInput
 from kivy.uix.gridlayout import GridLayout
-from kivy.lang import Builder
+# from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from controller import controller
@@ -25,7 +25,7 @@ Window.size = (450, 750)
 # Config.set('graphics', 'height', '750')
 # Config.write()
 
-Builder.load_file('./view/MyApp.kv')
+# Builder.load_file('./view/my.kv')
 
 
 class AppScreenManager(ScreenManager):
@@ -87,7 +87,6 @@ class AppScreenManager(ScreenManager):
     def __init__(self, *args):
         super(AppScreenManager, self).__init__(*args)
 
-        # Set the scroll view, so it may, well, scroll
         self.ids.scroll.size = (200, Window.height)
         self.ids.list.bind(minimum_height=self.ids.list.setter('height'))
 
