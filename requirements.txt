@@ -1,0 +1,12 @@
+certifi==2018.8.24
+chardet==3.0.4
+Cython==0.28.5
+docutils==0.14
+idna==2.7
+Kivy==1.10.1
+Kivy-Garden==0.1.4
+pygame==1.9.4
+Pygments==2.2.0
+requests==2.19.1
+SQLAlchemy==1.2.11
+urllib3==1.23
