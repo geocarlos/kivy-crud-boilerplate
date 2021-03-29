@@ -6,7 +6,7 @@ idna==2.7
 Kivy==1.10.1
 Kivy-Garden==0.1.4
 pygame==1.9.4
-Pygments==2.2.0
+Pygments==2.7.4
 requests==2.20.0
 SQLAlchemy==1.2.11
 urllib3==1.23
