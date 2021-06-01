@@ -9,4 +9,4 @@ pygame==1.9.4
 Pygments==2.2.0
 requests==2.20.0
 SQLAlchemy==1.2.11
-urllib3==1.23
+urllib3==1.26.5
