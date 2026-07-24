@@ -77,7 +77,9 @@ class AppScreenManager(ScreenManager):
     def add_item(self):
         if not self.ids.item.text:
             return
-        cat = [c for c in self.categories if c.name == self.ids.categories.text][0]
+        if self.ids.categories.text == 'Select':
+            return
+        [cat] = [c for c in self.categories if c.name == self.ids.categories.text]
         controller.add_item({"name": self.ids.item.text, "cat_id": cat.id})
         self.ids.item.text = ''
         self.ids.list.clear_widgets()
