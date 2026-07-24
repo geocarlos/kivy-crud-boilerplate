@@ -3,13 +3,12 @@
     for code directly related to the app view.
 """
 
-from kivy.app import App
-from kivy.uix.button import Button
+from kivymd.app import MDApp
+from kivymd.uix.button import MDRaisedButton, MDFlatButton
+from kivymd.uix.textfield import MDTextField
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.scrollview import ScrollView
-from kivy.uix.textinput import TextInput
 from kivy.uix.gridlayout import GridLayout
-# from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from controller import controller
@@ -41,9 +40,9 @@ class AppScreenManager(ScreenManager):
         items = controller.get_items()
 
         for item in items:
-            self.ids.list.add_widget(Button(text=item.name, id=str(item.id), color=(0, 0, 0, 1),
-                        background_color=(.9, 9, 9, 0), font_size=30,
-                        halign='left', size_hint_y=None, height=30))
+            self.ids.list.add_widget(
+                MDFlatButton(text=item.name, font_size=30,
+                             size_hint_y=None, height=40))
 
     """
         Set the values for the Category spinner
@@ -96,16 +95,18 @@ class AppScreenManager(ScreenManager):
 class CategoryForm(GridLayout):
     def __init__(self, root, *args, **kwargs):
         super(CategoryForm, self).__init__(*args, **kwargs)
-        self.name = TextInput(hint_text='Name of category')
+        self.name = MDTextField(hint_text='Name of category')
         self.add_widget(self.name)
-        self.add_widget(Button(text='Add', on_press=root.add_category))
-        self.add_widget(
-            Button(text='Cancel', on_press=root.cancel_category))
+        self.add_widget(MDRaisedButton(text='Add', on_press=root.add_category))
+        self.add_widget(MDFlatButton(text='Cancel', on_press=root.cancel_category))
         self.cols = 1
         self.spacing = 5
         self.size_hint = (0.9, 0.3)
         self.pos_hint = {'x': .05, 'y': .5}
 
-class MyApp(App):
+
+class MyApp(MDApp):
     def build(self):
+        self.theme_cls.primary_palette = "Teal"
+        self.theme_cls.theme_style = "Light"
         return AppScreenManager()

@@ -1,0 +1,11 @@
+[project]
+name = "kivy-crud-boilerplate"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "kivy[base]>=2.3.1",
+    "kivymd @ git+https://github.com/kivymd/KivyMD.git@1.1.1",
+    "sqlalchemy>=2.0",
+]
