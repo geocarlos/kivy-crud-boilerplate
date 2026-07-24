@@ -1,5 +1,5 @@
-<_Button@Button>:
-    background_color: .5, .9, 1, .9
+<_Button@MDRaisedButton>:
+    md_bg_color: .5, .9, 1, .9
 
 <AppScreenManager>:
     Screen:
@@ -15,7 +15,7 @@
             FloatLayout:
                 pos_hint: {'x': 0, 'top': 1}
                 size_hint: 1, .1
-                Label:
+                MDLabel:
                     text: 'My Item List'
                     halign: 'center'
                     font_size: 30
@@ -63,7 +63,7 @@
             FloatLayout:
                 pos_hint: {'x': 0, 'top': 1}
                 size_hint: 1, .1
-                Label:
+                MDLabel:
                     text: 'Add new item'
                     halign: 'center'
                     font_size: 30
@@ -87,17 +87,16 @@
                     padding: 14
                     spacing: 14
                     pos_hint: {'x': 0, 'y': -0.25}
-                    Label:
+                    MDLabel:
                         text: 'Item: '
                         font_size: 25
-                    Label:
+                    MDLabel:
                         text: 'Category: '
                         font_size: 25
-                    TextInput:
+                    MDTextField:
                         id: item
                         hint_text: 'Item name'
                         font_size: 25
-                        background_color: 0, 1, .7, .3
                     FloatLayout:
                         Spinner:
                             id: categories
