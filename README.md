@@ -1,25 +1,39 @@
-# Boilerplate for Kivy CRUD
+# Boilerplate for KivyMD CRUD
 
-This project is intended to put together minimal code necessary to start a Kivy application with CRUD. The MVC approach is used.
+This project is intended to put together minimal code necessary to start a [KivyMD](https://kivymd.readthedocs.io) application with CRUD. The MVC approach is used.
 
-## Model and Database
+## Stack
 
-Persistence uses the SQLAlchemy framework, which makes it easy to handle database queries from Python, and the SQLite database system, which can easily be packed and shipped with a desktop or mobile application.
+- **[Kivy](https://kivy.org) 2.3+** - cross-platform UI framework
+- **[KivyMD](https://kivymd.readthedocs.io) 1.1.1** - Material Design components for Kivy
+- **[SQLAlchemy](https://www.sqlalchemy.org) 2.0+** - ORM for database access
+- **SQLite** - embedded database, easy to ship with desktop or mobile apps
+- **[uv](https://docs.astral.sh/uv/)** - fast Python package and project manager
 
-## Install requirements in a virtual environment
+## Requirements
 
-`pip install -r requirements.txt`
+- Python 3.11 or 3.12
+- `uv` ([install instructions](https://docs.astral.sh/uv/getting-started/installation/))
 
-Before installing the requirements in a virtual environment, make sure you have installed python-dev, if using Python 2, or python3-dev, if using Python 3.
+## Install and run
 
-In case you do not want to use a virtual environment, just install requirements like this:
+```bash
+uv sync
+uv run app.py
+```
 
-`sudo apt-get install python-kivy`
+`uv sync` creates a virtual environment and installs all dependencies automatically. No manual `pip install` or `venv` setup needed.
 
-or
+## Project structure
 
-`sudo apt-get install python3-kivy`
-
-Then, assuming you have installed Pip, you may use it to install SQLAlchemy:
-
-`pip install sqlalchemy`
+```
+app.py              # Entry point
+model/
+    model.py        # SQLAlchemy ORM models (Item, Category)
+    db/app.db       # SQLite database (auto-created on first run)
+controller/
+    controller.py   # CRUD operations connecting model and view
+view/
+    view.py         # App and screen classes
+    my.kv           # KivyMD layout definitions
+```
